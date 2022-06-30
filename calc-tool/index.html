@@ -29,7 +29,10 @@
 				<div class="row">
 					<div class="col-12">
 						<form id="earning_calc">
-							<h2>Rate Outlet</h2>
+							<h2>Net Gain</h2>
+							<label for="net_gain">net_gain</label>
+							<input type="text" name="net_gain" id="net_gain" disabled>
+							<h2>Our Clients Exclusive Offering</h2>
 							<label for="mortgage_loan">mortgage_loan</label>
 							<input type="text" name="mortgage_loan" id="mortgage_loan" value="400000">
 							<label for="rate_charged_to_client">rate_charged_to_client</label>
@@ -42,8 +45,7 @@
 							<input type="text" name="final_commission_paid_mlo_dollar" id="final_commission_paid_mlo_dollar" disabled>
 							<label for="final_commission_paid_mlo_percent">final_commission_paid_mlo_percent</label>
 							<input type="text" name="final_commission_paid_mlo_percent" id="final_commission_paid_mlo_percent" disabled>
-							<label for="net_gain">net_gain</label>
-							<input type="text" name="net_gain" id="net_gain" disabled>
+							
 
 							<h2>Other mortgage companies</h2>
 							<label for="total_commission_other">total_commission_other</label>
@@ -83,12 +85,14 @@
 
 			function calculate() {
 				total_commission.value = mortgage_loan.value * rate_charged_to_client.value;
-				final_commission_paid_mlo_dollar.value = (mortgage_loan.value * rate_charged_to_client.value) - less_house_flat_fee.value;
+				final_commission_paid_mlo_dollar.value = total_commission.value - less_house_flat_fee.value;
 				total_commission_other.value = total_commission.value;
-				final_commission_paid_mlo_percent.value = ((mortgage_loan.value * rate_charged_to_client.value) - less_house_flat_fee.value) / mortgage_loan.value;
+				final_commission_paid_mlo_percent.value = final_commission_paid_mlo_dollar.value / mortgage_loan.value;
 
 				final_commission_paid_mlo_dollar_other.value = mortgage_loan.value * final_commission_paid_mlo_percent_other.value;
 				less_house_percent_other.value = final_commission_paid_mlo_dollar_other.value - total_commission_other.value;
+
+				net_gain.value = final_commission_paid_mlo_dollar.value - final_commission_paid_mlo_dollar_other.value;
 			};
 
 
