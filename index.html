@@ -59,6 +59,11 @@
         padding-top: 50px;
         padding-bottom: 50px;
       }
+      @media (min-width: 576px) {
+        .input-shrink {
+          max-width: 25%;
+        }
+      }
     </style>
   </head>
   <body>
@@ -75,7 +80,6 @@
   <div class="container-fluid hero-bg">
     <h1 class="text-white display-3 fw-bold">The world's premier MLO recruiting firm</h1>
   </div>
-  <div class="container marketing">
 
   <section class="container">
     <div class="row">
@@ -99,39 +103,80 @@
       </div>
     </div>
   </section>
-</main>
 
-  <section class="callout-section">
-    <div class="container">
+
+  <section class="callout-section container-fluid">
       <div class="row">
         <div class="col-12 text-center">
           <h2 class="display-3 text-white">RECRUITING <strong>REMASTERED</strong></h2>
         </div>
       </div>
+  </section>
+
+  <section class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <h2 class="display-5">Let's get this <strong>show on the road</strong></h2>
+        <p>Find the most rewarding career of your life, today.</p>
+      </div>
+      <div class="col-md-4">
+        <a class="btn btn-lg btn-dark fw-bold" href="mailto:globorecruiting@gmail.com">Submit Your Resume</a>
+      </div>
     </div>
   </section>
 
-  <section>
+  <section class="bg-dark">
     <div class="container">
       <div class="row">
-        <div class="col-md-8">
-          <h2 class="display-5">Let's get this <strong>show on the road</strong></h2>
-          <p>Find the most rewarding career of your life, today.</p>
-        </div>
-        <div class="col-md-4">
-          <a class="btn btn-lg btn-dark fw-bold" href="mailto:globorecruiting@gmail.com">Submit Your Resume</a>
+        <div class="col-md-8 mx-auto text-white">
+          <div class="align-center">
+            <h2 class="display-5 fw-bold">Calculate Your Lost Commission</h2>
+          </div>
+          <form action="/calc-tool">
+            <label class="lead mb-1" for="mortgage_loan">Mortgage Loan</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+              </div>
+              <input required class="form-control input-shrink mb-2" type="number" min="150000" max="675000" step="25000" name="mortgage_loan" id="mortgage_loan" value="400000">
+            </div>
+            <label class="lead mb-1" for="points_charged_to_client">Points Charged to Client</label>
+            <div class="input-group">
+              <input required class="form-control input-shrink mb-2" type="number" min="1.5" max="3" step=".05" name="points_charged_to_client" id="points_charged_to_client" value="2.5">
+              <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon2">%</span>
+              </div>
+            </div>
+            <label class="lead mb-1" for="final_commission_paid_mlo_percent_other">Your Company's Commission Payout</label>
+            <div class="input-group">
+              <input required class="form-control input-shrink mb-4" type="number" min="1" max="3" step=".05" name="final_commission_paid_mlo_percent_other" id="final_commission_paid_mlo_percent_other" value="1.5">
+              <div class="input-group-append">
+                <span class="input-group-text" id="basic-addon2">%</span>
+              </div>
+            </div>
+            <input class="btn btn-light btn-block btn-lg fw-bold" type="submit" id="submit_btn" value="Calculate">
+          </form>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="bg-dark text-white my-0 py-4">
-    <div class="container">
-      <p class="mb-0">&copy; 2022 Globo Recruiting</p>
-    </div>
-  </footer>
+  <section class="callout-section container-fluid">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h2 class="display-3 text-white">LET'S <strong>DO THIS</strong></h2>
+        </div>
+      </div>
+  </section>
+
 </main>
+
+
+<footer class="bg-dark text-white my-0 py-4">
+  <div class="container">
+    <p class="mb-0">&copy; 2022 Globo Recruiting</p>
+  </div>
+</footer>
 
       
   </body>

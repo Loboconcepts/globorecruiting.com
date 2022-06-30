@@ -166,6 +166,9 @@
     </div>
   </footer>
 		<script>
+			
+		 
+		  
 			let calculated = false;
 			const earning_calc = document.getElementById("earning_calc");
 			const mortgage_loan = document.getElementById("mortgage_loan");
@@ -181,6 +184,16 @@
 			const final_commission_paid_mlo_dollar_other = document.getElementById("final_commission_paid_mlo_dollar_other");
 			const final_commission_paid_mlo_percent_other = document.getElementById("final_commission_paid_mlo_percent_other");
 			const final_commission_paid_mlo_percent_other_copy = document.getElementById("final_commission_paid_mlo_percent_other_copy");
+
+			const queryString = window.location.search;
+			if (queryString.length > 0) {
+				const urlParams = new URLSearchParams(queryString);
+				if (urlParams) {
+			  	mortgage_loan.value = urlParams.get('mortgage_loan') || 400000;
+				  points_charged_to_client.value = urlParams.get('points_charged_to_client') || 2.5;
+				  final_commission_paid_mlo_percent_other.value = urlParams.get('final_commission_paid_mlo_percent_other') || 1.5;
+			  };
+			};
 
 			const calculation = document.getElementById("calculation");
 			const submit_btn = document.getElementById("submit_btn")
