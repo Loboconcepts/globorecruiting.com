@@ -67,7 +67,7 @@
 						</div>
 						<label for="points_charged_to_client">Points Charged to Client</label>
 						<div class="input-group">
-							<input required class="form-control input-shrink" type="number" min="1.5" max="3" step=".5" name="points_charged_to_client" id="points_charged_to_client" value="2.5">
+							<input required class="form-control input-shrink" type="number" min="1.5" max="3" step=".05" name="points_charged_to_client" id="points_charged_to_client" value="2.5">
 							<div class="input-group-append">
 						    <span class="input-group-text" id="basic-addon2">%</span>
 						  </div>
@@ -205,7 +205,7 @@
 				total_commission.value = mortgage_loan.value * points_charged_to_client.value/100;
 				final_commission_paid_mlo_dollar.value = total_commission.value - less_house_flat_fee.value;
 				total_commission_other.value = total_commission.value;
-				final_commission_paid_mlo_percent.value = final_commission_paid_mlo_dollar.value / mortgage_loan.value;
+				final_commission_paid_mlo_percent.value = (final_commission_paid_mlo_dollar.value / mortgage_loan.value) * 100;
 
 				final_commission_paid_mlo_dollar_other.value = mortgage_loan.value * final_commission_paid_mlo_percent_other.value/100;
 				less_house_percent_other.value = Math.abs(final_commission_paid_mlo_dollar_other.value - total_commission_other.value);
