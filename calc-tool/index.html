@@ -29,6 +29,20 @@
 			label {
 				display: block;
 			}
+
+			#calculation {
+				display: none;
+			}
+
+			#calculation.show {
+				display: block;
+			}
+
+			@media (min-width: 576px) {
+				.input-shrink {
+					max-width: 25%;
+				}
+			}
 		</style>
 	</head>
 	<body>
@@ -40,61 +54,119 @@
 		  </nav>
 		</header>
 		<main>
-			<div class="container py-5">
-				<form id="earning_calc" class="row">
+			<div class="container">
+				<form id="earning_calc" class="row py-5">
 					<div class="col-12 mb-3">
 						<h2>Calculation Fields</h2>
 						<label for="mortgage_loan">Mortgage Loan</label>
-						<input class="form-control" type="number" min="150000" max="675000" step="25000" name="mortgage_loan" id="mortgage_loan" value="400000">
+						<div class="input-group">
+							<div class="input-group-prepend">
+						    <span class="input-group-text">$</span>
+						  </div>
+							<input required class="form-control input-shrink" type="number" min="150000" max="675000" step="25000" name="mortgage_loan" id="mortgage_loan" value="400000">
+						</div>
 						<label for="points_charged_to_client">Points Charged to Client</label>
 						<div class="input-group">
-							<input class="form-control" type="number" min="1.5" max="3" step=".5" name="points_charged_to_client" id="points_charged_to_client" value="2.5">
+							<input required class="form-control input-shrink" type="number" min="1.5" max="3" step=".5" name="points_charged_to_client" id="points_charged_to_client" value="2.5">
 							<div class="input-group-append">
 						    <span class="input-group-text" id="basic-addon2">%</span>
 						  </div>
 						</div>
-						<label for="final_commission_paid_mlo_percent_other">Your Company's Commission Payout (%)</label>
+						<label for="final_commission_paid_mlo_percent_other">Your Company's Commission Payout</label>
 						<div class="input-group">
-							<input class="form-control" type="number" min="1" max="3" step=".05" name="final_commission_paid_mlo_percent_other" id="final_commission_paid_mlo_percent_other" value="1.5">
+							<input required class="form-control input-shrink" type="number" min="1" max="3" step=".05" name="final_commission_paid_mlo_percent_other" id="final_commission_paid_mlo_percent_other" value="1.5">
 							<div class="input-group-append">
 						    <span class="input-group-text" id="basic-addon2">%</span>
 						  </div>
 						</div>
 					</div>
 					<div class="col-6">
-						<input class="btn btn-dark btn-block btn-lg" type="submit" id="submit">
+						<input class="btn btn-dark btn-block btn-lg" type="submit" id="submit_btn" value="Calculate">
 					</div>
-					<div class="col-12 mb-3">
-						<h2>Net Gain</h2>
-						<label for="final_commission_paid_mlo_dollar">We Pay</label>
-						<input type="text" name="final_commission_paid_mlo_dollar" id="final_commission_paid_mlo_dollar" readonly>
-						<label for="final_commission_paid_mlo_dollar_other">They Pay</label>
-						<input type="text" name="final_commission_paid_mlo_dollar_other" id="final_commission_paid_mlo_dollar_other" readonly>
-						<label for="net_gain">You Gain</label>
-						<input type="text" name="net_gain" id="net_gain" readonly>
-					</div>
-					<div class="col-md-5 mb-3">
-						<h2>Our Clients</h2>
-						<label for="total_commission">Total Commission</label>
-						<input type="text" name="total_commission" id="total_commission" readonly>
-						<label for="less_house_flat_fee">Less House Flat Fee</label>
-						<input type="text" name="less_house_flat_fee" id="less_house_flat_fee" readonly value="1500">
-						<label for="final_commission_paid_mlo_percent">Final Commission Paid MLO Percent</label>
-						<input type="text" name="final_commission_paid_mlo_percent" id="final_commission_paid_mlo_percent" readonly>
-					</div>
-					<div class="col-md-5 mb-3">
-						<h2>Your Company</h2>
-						<label for="total_commission_other">Total Commission</label>
-						<input type="text" name="total_commission_other" id="total_commission_other" readonly>
-						<label for="less_house_percent_other">Less House Percent</label>
-						<input type="text" name="less_house_percent_other" id="less_house_percent_other" readonly>
-						<label for="final_commission_paid_mlo_percent_other_copy">Your Company's Commission Payout (%)</label>
-						<input type="text" name="final_commission_paid_mlo_percent_other_copy" id="final_commission_paid_mlo_percent_other_copy" readonly>
+					<div id="calculation">
+						<div class="col-12 mb-3">
+							<h2>Net Gain</h2>
+							<label for="final_commission_paid_mlo_dollar">We Pay</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+							    <span class="input-group-text">$</span>
+							  </div>
+								<input class="form-control input-shrink" type="text" name="final_commission_paid_mlo_dollar" id="final_commission_paid_mlo_dollar" readonly>
+							</div>
+							<label for="final_commission_paid_mlo_dollar_other">They Pay</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+							    <span class="input-group-text">$</span>
+							  </div>
+								<input class="form-control input-shrink" type="text" name="final_commission_paid_mlo_dollar_other" id="final_commission_paid_mlo_dollar_other" readonly>
+							</div>
+							<label for="net_gain">You Gain</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+							    <span class="input-group-text">$</span>
+							  </div>
+								<input class="form-control input-shrink" type="text" name="net_gain" id="net_gain" readonly>
+							</div>
+						</div>
+						<div class="col-md-5 mb-3">
+							<h2>Our Clients</h2>
+							<label for="total_commission">Total Commission</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+							    <span class="input-group-text">$</span>
+							  </div>
+								<input class="form-control" type="text" name="total_commission" id="total_commission" readonly>
+							</div>
+							<label for="less_house_flat_fee">House <strong>Flat</strong> Fee</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+							    <span class="input-group-text">$</span>
+							  </div>
+								<input class="form-control" type="text" name="less_house_flat_fee" id="less_house_flat_fee" readonly value="1500">
+							</div>
+							<label for="final_commission_paid_mlo_percent">Final Commission Paid MLO</label>
+							<div class="input-group">
+								<input class="form-control" type="text" name="final_commission_paid_mlo_percent" id="final_commission_paid_mlo_percent" readonly>
+								<div class="input-group-append">
+							    <span class="input-group-text" id="basic-addon2">%</span>
+							  </div>
+							</div>
+						</div>
+						<div class="col-md-5 mb-3">
+							<h2>Your Company</h2>
+							<label for="total_commission_other">Total Commission</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+							    <span class="input-group-text">$</span>
+							  </div>
+								<input class="form-control" type="text" name="total_commission_other" id="total_commission_other" readonly>
+							</div>
+							<label for="less_house_percent_other">House Fee</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+							    <span class="input-group-text">$</span>
+							  </div>
+								<input class="form-control" type="text" name="less_house_percent_other" id="less_house_percent_other" readonly>
+							</div>
+							<label for="final_commission_paid_mlo_percent_other_copy">Your Company's Commission Payout</label>
+							<div class="input-group">
+								<input class="form-control" type="text" name="final_commission_paid_mlo_percent_other_copy" id="final_commission_paid_mlo_percent_other_copy" readonly>
+								<div class="input-group-append">
+							    <span class="input-group-text" id="basic-addon2">%</span>
+							  </div>
+							</div>
+						</div>
 					</div>
 				</form>
 			</div>
 		</main>
+		<footer class="bg-dark text-white my-0 py-4">
+    <div class="container">
+      <p class="mb-0">&copy; 2022 Globo Recruiting</p>
+    </div>
+  </footer>
 		<script>
+			let calculated = false;
 			const earning_calc = document.getElementById("earning_calc");
 			const mortgage_loan = document.getElementById("mortgage_loan");
 			const points_charged_to_client = document.getElementById("points_charged_to_client");
@@ -110,9 +182,23 @@
 			const final_commission_paid_mlo_percent_other = document.getElementById("final_commission_paid_mlo_percent_other");
 			const final_commission_paid_mlo_percent_other_copy = document.getElementById("final_commission_paid_mlo_percent_other_copy");
 
+			const calculation = document.getElementById("calculation");
+			const submit_btn = document.getElementById("submit_btn")
+
 			document.addEventListener('submit', function(ev) {
 				event.preventDefault();
-				calculate();
+				if (calculated) {
+					calculated = false;
+					submit_btn.value = "Calculate";
+					mortgage_loan.value="";
+					points_charged_to_client.value="";
+					final_commission_paid_mlo_percent_other.value="";
+				} else {
+					calculated = true;
+					submit_btn.value = "Clear"
+					calculate();
+				};
+				calculation.classList.toggle("show");
 			})
 
 			function calculate() {
@@ -121,8 +207,8 @@
 				total_commission_other.value = total_commission.value;
 				final_commission_paid_mlo_percent.value = final_commission_paid_mlo_dollar.value / mortgage_loan.value;
 
-				final_commission_paid_mlo_dollar_other.value = mortgage_loan.value * final_commission_paid_mlo_percent_other.value;
-				less_house_percent_other.value = final_commission_paid_mlo_dollar_other.value - total_commission_other.value;
+				final_commission_paid_mlo_dollar_other.value = mortgage_loan.value * final_commission_paid_mlo_percent_other.value/100;
+				less_house_percent_other.value = Math.abs(final_commission_paid_mlo_dollar_other.value - total_commission_other.value);
 
 				net_gain.value = final_commission_paid_mlo_dollar.value - final_commission_paid_mlo_dollar_other.value;
 				final_commission_paid_mlo_percent_other_copy.value = final_commission_paid_mlo_percent_other.value;
