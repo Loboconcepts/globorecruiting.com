@@ -17,7 +17,7 @@
 		<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
 
 		<style>
-			input:disabled {
+			input:readonly {
 				color:#000000;
 				background-color: #FFFFFF;
 			}
@@ -43,41 +43,53 @@
 			<div class="container py-5">
 				<form id="earning_calc" class="row">
 					<div class="col-12 mb-3">
-						<h2>Mortgage Loan</h2>
+						<h2>Calculation Fields</h2>
 						<label for="mortgage_loan">Mortgage Loan</label>
-						<input type="text" name="mortgage_loan" id="mortgage_loan" value="400000">
+						<input class="form-control" type="number" min="150000" max="675000" step="25000" name="mortgage_loan" id="mortgage_loan" value="400000">
 						<label for="points_charged_to_client">Points Charged to Client</label>
-						<input type="text" name="points_charged_to_client" id="points_charged_to_client" value=".025">
+						<div class="input-group">
+							<input class="form-control" type="number" min="1.5" max="3" step=".5" name="points_charged_to_client" id="points_charged_to_client" value="2.5">
+							<div class="input-group-append">
+						    <span class="input-group-text" id="basic-addon2">%</span>
+						  </div>
+						</div>
+						<label for="final_commission_paid_mlo_percent_other">Your Company's Commission Payout (%)</label>
+						<div class="input-group">
+							<input class="form-control" type="number" min="1" max="3" step=".05" name="final_commission_paid_mlo_percent_other" id="final_commission_paid_mlo_percent_other" value="1.5">
+							<div class="input-group-append">
+						    <span class="input-group-text" id="basic-addon2">%</span>
+						  </div>
+						</div>
+					</div>
+					<div class="col-6">
+						<input class="btn btn-dark btn-block btn-lg" type="submit" id="submit">
 					</div>
 					<div class="col-12 mb-3">
 						<h2>Net Gain</h2>
-						<label for="final_commission_paid_mlo_dollar">Final Commission Paid MLO Dollar</label>
-						<input type="text" name="final_commission_paid_mlo_dollar" id="final_commission_paid_mlo_dollar" disabled>
-						<label for="final_commission_paid_mlo_dollar_other">Final Commission Paid MLO Dollar Other</label>
-						<input type="text" name="final_commission_paid_mlo_dollar_other" id="final_commission_paid_mlo_dollar_other" disabled>
-						<label for="net_gain">Net Gain</label>
-						<input type="text" name="net_gain" id="net_gain" disabled>
+						<label for="final_commission_paid_mlo_dollar">We Pay</label>
+						<input type="text" name="final_commission_paid_mlo_dollar" id="final_commission_paid_mlo_dollar" readonly>
+						<label for="final_commission_paid_mlo_dollar_other">They Pay</label>
+						<input type="text" name="final_commission_paid_mlo_dollar_other" id="final_commission_paid_mlo_dollar_other" readonly>
+						<label for="net_gain">You Gain</label>
+						<input type="text" name="net_gain" id="net_gain" readonly>
 					</div>
 					<div class="col-md-5 mb-3">
 						<h2>Our Clients</h2>
 						<label for="total_commission">Total Commission</label>
-						<input type="text" name="total_commission" id="total_commission" disabled>
+						<input type="text" name="total_commission" id="total_commission" readonly>
 						<label for="less_house_flat_fee">Less House Flat Fee</label>
-						<input type="text" name="less_house_flat_fee" id="less_house_flat_fee" disabled value="1500">
+						<input type="text" name="less_house_flat_fee" id="less_house_flat_fee" readonly value="1500">
 						<label for="final_commission_paid_mlo_percent">Final Commission Paid MLO Percent</label>
-						<input type="text" name="final_commission_paid_mlo_percent" id="final_commission_paid_mlo_percent" disabled>
+						<input type="text" name="final_commission_paid_mlo_percent" id="final_commission_paid_mlo_percent" readonly>
 					</div>
 					<div class="col-md-5 mb-3">
 						<h2>Your Company</h2>
-						<label for="total_commission_other">Total Commission Other</label>
-						<input type="text" name="total_commission_other" id="total_commission_other" disabled>
-						<label for="less_house_percent_other">Less House Percent Other</label>
-						<input type="text" name="less_house_percent_other" id="less_house_percent_other" disabled>
-						<label for="final_commission_paid_mlo_percent_other">Final Commission Paid MLO Percent Other</label>
-						<input type="text" name="final_commission_paid_mlo_percent_other" id="final_commission_paid_mlo_percent_other" value=".015">
-					</div>
-					<div class="col-md-6">
-						<input class="btn btn-dark btn-block" type="submit" id="submit">
+						<label for="total_commission_other">Total Commission</label>
+						<input type="text" name="total_commission_other" id="total_commission_other" readonly>
+						<label for="less_house_percent_other">Less House Percent</label>
+						<input type="text" name="less_house_percent_other" id="less_house_percent_other" readonly>
+						<label for="final_commission_paid_mlo_percent_other_copy">Your Company's Commission Payout (%)</label>
+						<input type="text" name="final_commission_paid_mlo_percent_other_copy" id="final_commission_paid_mlo_percent_other_copy" readonly>
 					</div>
 				</form>
 			</div>
@@ -96,6 +108,7 @@
 			const less_house_percent_other = document.getElementById("less_house_percent_other");
 			const final_commission_paid_mlo_dollar_other = document.getElementById("final_commission_paid_mlo_dollar_other");
 			const final_commission_paid_mlo_percent_other = document.getElementById("final_commission_paid_mlo_percent_other");
+			const final_commission_paid_mlo_percent_other_copy = document.getElementById("final_commission_paid_mlo_percent_other_copy");
 
 			document.addEventListener('submit', function(ev) {
 				event.preventDefault();
@@ -103,7 +116,7 @@
 			})
 
 			function calculate() {
-				total_commission.value = mortgage_loan.value * points_charged_to_client.value;
+				total_commission.value = mortgage_loan.value * points_charged_to_client.value/100;
 				final_commission_paid_mlo_dollar.value = total_commission.value - less_house_flat_fee.value;
 				total_commission_other.value = total_commission.value;
 				final_commission_paid_mlo_percent.value = final_commission_paid_mlo_dollar.value / mortgage_loan.value;
@@ -112,6 +125,7 @@
 				less_house_percent_other.value = final_commission_paid_mlo_dollar_other.value - total_commission_other.value;
 
 				net_gain.value = final_commission_paid_mlo_dollar.value - final_commission_paid_mlo_dollar_other.value;
+				final_commission_paid_mlo_percent_other_copy.value = final_commission_paid_mlo_percent_other.value;
 			};
 
 
