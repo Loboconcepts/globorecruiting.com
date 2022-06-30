@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Globo Recruiting is the world's premier MLO recruiting firm">
+    <meta name="author" content="Globo Recruiting">
+    <title>Globo Recruiting | Calculator Tool</title>
+
+    <!-- Bootstrap core CSS -->
+		<link href="https://getbootstrap.com/docs/5.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+		<meta name="theme-color" content="#212529">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,900;1,300;1,900&display=swap" rel="stylesheet">
+		<link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	</head>
+	<body>
+		<header>
+		  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+		    <div class="container-fluid align-center">
+		      <a class="navbar-brand" href="/"><img src="../images/globo-recruiting-logo-sm.png" alt="Globo Recruiting" width="250"></a>
+		    </div>
+		  </nav>
+		</header>
+		<main>
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<form id="earning_calc">
+							<h2>Rate Outlet</h2>
+							<label for="mortgage_loan">mortgage_loan</label>
+							<input type="text" name="mortgage_loan" id="mortgage_loan" value="400000">
+							<label for="rate_charged_to_client">rate_charged_to_client</label>
+							<input type="text" name="rate_charged_to_client" id="rate_charged_to_client" value=".025">
+							<label for="total_commission">total_commission</label>
+							<input type="text" name="total_commission" id="total_commission" disabled>
+							<label for="less_house_flat_fee">less_house_flat_fee</label>
+							<input type="text" name="less_house_flat_fee" id="less_house_flat_fee" disabled value="1500">
+							<label for="final_commission_paid_mlo_dollar">final_commission_paid_mlo_dollar</label>
+							<input type="text" name="final_commission_paid_mlo_dollar" id="final_commission_paid_mlo_dollar" disabled>
+							<label for="final_commission_paid_mlo_percent">final_commission_paid_mlo_percent</label>
+							<input type="text" name="final_commission_paid_mlo_percent" id="final_commission_paid_mlo_percent" disabled>
+							<label for="net_gain">net_gain</label>
+							<input type="text" name="net_gain" id="net_gain" disabled>
+
+							<h2>Other mortgage companies</h2>
+							<label for="total_commission_other">total_commission_other</label>
+							<input type="text" name="total_commission_other" id="total_commission_other" disabled>
+							<label for="less_house_percent_other">less_house_percent_other</label>
+							<input type="text" name="less_house_percent_other" id="less_house_percent_other" disabled>
+							<label for="final_commission_paid_mlo_dollar_other">final_commission_paid_mlo_dollar_other</label>
+							<input type="text" name="final_commission_paid_mlo_dollar_other" id="final_commission_paid_mlo_dollar_other" disabled>
+							<label for="final_commission_paid_mlo_percent_other">final_commission_paid_mlo_percent_other</label>
+							<input type="text" name="final_commission_paid_mlo_percent_other" id="final_commission_paid_mlo_percent_other" value=".015">
+
+							<input type="submit" id="submit">
+						</form>
+					</div>
+				</div>
+			</div>
+		</main>
+		<script>
+			const earning_calc = document.getElementById("earning_calc");
+			const mortgage_loan = document.getElementById("mortgage_loan");
+			const rate_charged_to_client = document.getElementById("rate_charged_to_client");
+			const total_commission = document.getElementById("total_commission");
+			const less_house_flat_fee = document.getElementById("less_house_flat_fee");
+			const final_commission_paid_mlo_dollar = document.getElementById("final_commission_paid_mlo_dollar");
+			const final_commission_paid_mlo_percent = document.getElementById("final_commission_paid_mlo_percent");
+			const net_gain = document.getElementById("net_gain");
+
+			const total_commission_other = document.getElementById("total_commission_other");
+			const less_house_percent_other = document.getElementById("less_house_percent_other");
+			const final_commission_paid_mlo_dollar_other = document.getElementById("final_commission_paid_mlo_dollar_other");
+			const final_commission_paid_mlo_percent_other = document.getElementById("final_commission_paid_mlo_percent_other");
+
+			document.addEventListener('submit', function(ev) {
+				event.preventDefault();
+				calculate();
+			})
+
+			function calculate() {
+				total_commission.value = mortgage_loan.value * rate_charged_to_client.value;
+				final_commission_paid_mlo_dollar.value = (mortgage_loan.value * rate_charged_to_client.value) - less_house_flat_fee.value;
+				total_commission_other.value = total_commission.value;
+				final_commission_paid_mlo_percent.value = ((mortgage_loan.value * rate_charged_to_client.value) - less_house_flat_fee.value) / mortgage_loan.value;
+
+				final_commission_paid_mlo_dollar_other.value = mortgage_loan.value * final_commission_paid_mlo_percent_other.value;
+				less_house_percent_other.value = final_commission_paid_mlo_dollar_other.value - total_commission_other.value;
+			};
+
+
+
+		</script>
+	</body>
+</html>
